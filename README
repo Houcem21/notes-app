@@ -1,0 +1,103 @@
+Notizen-Anwendung (Notes Application)
+
+Willkommen bei der Notizen-Anwendung! Dies ist ein einfaches Projekt, um zu lernen, wie man eine Frontend-Anwendung (Vue.js) mit einem eigenen, selbst erstellten Backend (a self-made backend) verbindet.
+
+Das Hauptziel (the main goal) dieses Projekts ist es, ein Backend zu haben, das:
+
+Von Grund auf (from scratch) von Ihnen erstellt wird.
+
+Nichts kostet (costs nothing) und keine Kreditkarte benötigt.
+
+Von mehreren Computern im selben Netzwerk (in the same network) aus erreichbar (accessible) ist.
+
+Kerntechnologie (Core Technology)
+Frontend: Vue.js (wird später gebaut)
+
+Backend: PocketBase
+
+Wir verwenden PocketBase, weil es perfekt für unsere Ziele ist. Es ist ein einzelnes Programm (a single program), das uns eine komplette Datenbank, Benutzerverwaltung (user management) und eine API gibt.
+
+1. Backend einrichten (Setting up the Backend)
+Ihr Backend ist eine PocketBase-Datenbank, die auf Ihrem Hauptcomputer (your main computer) läuft.
+
+a) PocketBase starten
+Laden Sie PocketBase von der offiziellen Webseite herunter (download from the official website).
+
+Entpacken (unzip) Sie die Datei.
+
+Öffnen Sie ein Terminal (a terminal) in diesem Ordner und starten Sie den Server mit diesem Befehl (with this command):
+
+./pocketbase serve
+
+Öffnen Sie die Admin-Oberfläche (the admin UI) in Ihrem Browser. Die Adresse wird im Terminal angezeigt (z.B. http://127.0.0.1:8090/_/).
+
+b) Die "Notizen"-Datenbank erstellen
+In der Admin-Oberfläche erstellen Sie die Struktur (the structure) für Ihre Notizen.
+
+Klicken Sie auf "+ New Collection" und nennen Sie sie notes.
+
+Fügen Sie diese Felder (add these fields) hinzu:
+
+title (Typ: text): Der Titel Ihrer Notiz.
+
+content (Typ: editor): Der Haupttext Ihrer Notiz.
+
+drawingData (Typ: text): Hier werden die Daten für Ihre Zeichnung als langer Text gespeichert.
+
+Ihr Backend ist jetzt bereit, Notizen zu empfangen (to receive notes).
+
+2. Auf einem gemeinsamen Server ausführen (Running on a Shared Server)
+Damit Ihr zweiter Computer mit dem Backend sprechen kann, müssen wir den Server für das Netzwerk öffnen.
+
+Server für das Netzwerk starten: Benutzen Sie diesen Befehl, um PocketBase zu starten. Der Teil 0.0.0.0 ist sehr wichtig.
+
+./pocketbase serve --http="0.0.0.0:8090"
+
+IP-Adresse finden: Finden Sie die lokale IP-Adresse (the local IP address) Ihres Hauptcomputers. (z.B. 192.168.1.50).
+
+Vom zweiten Computer verbinden: Auf Ihrem zweiten Computer ist die Adresse Ihres Backends jetzt nicht mehr localhost, sondern die IP-Adresse Ihres Hauptcomputers. Zum Beispiel: http://192.168.1.50:8090.
+
+3. CRUD-Operationen mit der PocketBase-API
+Ihre Frontend-Anwendung (Vue.js) wird mit dem Backend über eine API (Application Programming Interface) sprechen. Eine API ist wie ein Kellner (a waiter), der Bestellungen (requests) vom Frontend entgegennimmt und sie an die Küche (das Backend) weitergibt.
+
+PocketBase erstellt diese API für Sie automatisch. Hier sind die "Bestellungen", die Ihr Frontend senden wird:
+
+CREATE (Eine neue Notiz erstellen)
+Aktion: Sende eine POST-Anfrage an den Server.
+
+Adresse: http://<IP-ADRESSE>:8090/api/collections/notes/records
+
+Daten: Die Anfrage enthält die Daten für die neue Notiz (Titel, Inhalt) im JSON-Format.
+
+Ergebnis: Das Backend speichert die Notiz und gibt ihr eine einzigartige ID (a unique ID).
+
+READ (Alle Notizen lesen)
+Aktion: Sende eine GET-Anfrage an den Server.
+
+Adresse: http://<IP-ADRESSE>:8090/api/collections/notes/records
+
+Daten: Keine Daten nötig.
+
+Ergebnis: Das Backend sendet eine Liste mit allen Notizen, die es gespeichert hat.
+
+UPDATE (Eine Notiz bearbeiten)
+Aktion: Sende eine PATCH-Anfrage an den Server. PATCH wird für eine teilweise Aktualisierung (a partial update) verwendet.
+
+Adresse: http://<IP-ADRESSE>:8090/api/collections/notes/records/<ID_DER_NOTIZ>
+
+(Ersetzen Sie <ID_DER_NOTIZ> mit der echten ID der Notiz, die Sie ändern wollen).
+
+Daten: Die Anfrage enthält nur die Daten, die geändert wurden (z.B. nur der neue Titel).
+
+Ergebnis: Das Backend aktualisiert die Notiz in der Datenbank.
+
+DELETE (Eine Notiz löschen)
+Aktion: Sende eine DELETE-Anfrage an den Server.
+
+Adresse: http://<IP-ADRESSE>:8090/api/collections/notes/records/<ID_DER_NOTIZ>
+
+Daten: Keine Daten nötig.
+
+Ergebnis: Das Backend findet die Notiz mit dieser ID und löscht sie aus der Datenbank.
+
+Mit diesem Plan ist Ihr Backend vollständig definiert und bereit für die Entwicklung des Frontends.
