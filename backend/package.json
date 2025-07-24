@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "from": "^0.1.7",
+    "pocketbase": "^0.26.2",
+    "PocketBase": "npm:pocketbase@^0.26.2"
+  }
+}
