@@ -1,7 +1,18 @@
 {
+  "name": "notes-backend",
+  "version": "1.0.0",
+  "type": "module",
+
   "dependencies": {
     "from": "^0.1.7",
     "pocketbase": "^0.26.2",
     "PocketBase": "npm:pocketbase@^0.26.2"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "scripts": {
+    "dev": "node --loader ts-node/esm src/index.ts"
   }
 }
