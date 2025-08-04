@@ -1,103 +1,92 @@
-Notizen-Anwendung (Notes Application)
+Notizen-Anwendung: Einrichtungs-Anleitung (Setup Guide)
 
-Willkommen bei der Notizen-Anwendung! Dies ist ein einfaches Projekt, um zu lernen, wie man eine Frontend-Anwendung (Vue.js) mit einem eigenen, selbst erstellten Backend (a self-made backend) verbindet.
 
-Das Hauptziel (the main goal) dieses Projekts ist es, ein Backend zu haben, das:
+Dieses Dokument beschreibt die Schritte, um dieses Projekt auf einem neuen Computer einzurichten. Das Ziel ist es, ein funktionierendes Backend mit PocketBase zu starten, das bereit ist, mit dem Frontend zu kommunizieren (to communicate).
 
-Von Grund auf (from scratch) von Ihnen erstellt wird.
+1. Voraussetzungen (Prerequisites)
+Stellen Sie sicher (make sure), dass die folgende Software auf Ihrem Computer installiert ist:
 
-Nichts kostet (costs nothing) und keine Kreditkarte benötigt.
+Node.js: (Version 18 oder höher wird empfohlen / recommended). Sie können es von nodejs.org herunterladen.
 
-Von mehreren Computern im selben Netzwerk (in the same network) aus erreichbar (accessible) ist.
+2. Ordnerstruktur (Folder Structure)
+Das Projekt sollte diese Struktur haben:
 
-Kerntechnologie (Core Technology)
-Frontend: Vue.js (wird später gebaut)
+notes-app/
+│
+└───backend/
+    ├─── src/
+    │    └─── index.ts       # Ihr Anwendungs-Code (Your application code)
+    │
+    ├─── package.json        # Definiert die Abhängigkeiten (dependencies)
+    ├─── tsconfig.json       # Regeln für TypeScript (Rules for TypeScript)
+    └─── pocketbase/         # (Empfohlen) Hier entpacken Sie PocketBase
+         ├─── pocketbase     # Die ausführbare Datei (The executable file)
+         └─── pb_data/      # Ihre Datenbank-Dateien (Your database files)
 
-Backend: PocketBase
+3. Backend-Einrichtung: PocketBase
+Das Backend ist ein PocketBase-Server, der lokal (locally) auf Ihrem Computer läuft.
 
-Wir verwenden PocketBase, weil es perfekt für unsere Ziele ist. Es ist ein einzelnes Programm (a single program), das uns eine komplette Datenbank, Benutzerverwaltung (user management) und eine API gibt.
+Schritt 3.1: PocketBase starten
+Herunterladen (Download): Laden Sie PocketBase von der offiziellen Webseite herunter.
 
-1. Backend einrichten (Setting up the Backend)
-Ihr Backend ist eine PocketBase-Datenbank, die auf Ihrem Hauptcomputer (your main computer) läuft.
+Entpacken (Unzip): Erstellen Sie einen pocketbase-Ordner innerhalb Ihres backend-Ordners und entpacken Sie die Datei dort.
 
-a) PocketBase starten
-Laden Sie PocketBase von der offiziellen Webseite herunter (download from the official website).
+Server starten: Öffnen Sie ein neues Terminalfenster (a new terminal window), navigieren Sie in den backend/pocketbase-Ordner und starten Sie den Server mit diesem Befehl (this command):
 
-Entpacken (unzip) Sie die Datei.
-
-Öffnen Sie ein Terminal (a terminal) in diesem Ordner und starten Sie den Server mit diesem Befehl (with this command):
-
-./pocketbase serve
-
-Öffnen Sie die Admin-Oberfläche (the admin UI) in Ihrem Browser. Die Adresse wird im Terminal angezeigt (z.B. http://127.0.0.1:8090/_/).
-
-b) Die "Notizen"-Datenbank erstellen
-In der Admin-Oberfläche erstellen Sie die Struktur (the structure) für Ihre Notizen.
-
-Klicken Sie auf "+ New Collection" und nennen Sie sie notes.
-
-Fügen Sie diese Felder (add these fields) hinzu:
-
-title (Typ: text): Der Titel Ihrer Notiz.
-
-content (Typ: editor): Der Haupttext Ihrer Notiz.
-
-drawingData (Typ: text): Hier werden die Daten für Ihre Zeichnung als langer Text gespeichert.
-
-Ihr Backend ist jetzt bereit, Notizen zu empfangen (to receive notes).
-
-2. Auf einem gemeinsamen Server ausführen (Running on a Shared Server)
-Damit Ihr zweiter Computer mit dem Backend sprechen kann, müssen wir den Server für das Netzwerk öffnen.
-
-Server für das Netzwerk starten: Benutzen Sie diesen Befehl, um PocketBase zu starten. Der Teil 0.0.0.0 ist sehr wichtig.
-
+# Dieser Befehl macht den Server in Ihrem lokalen Netzwerk erreichbar (accessible)
 ./pocketbase serve --http="0.0.0.0:8090"
 
-IP-Adresse finden: Finden Sie die lokale IP-Adresse (the local IP address) Ihres Hauptcomputers. (z.B. 192.168.1.50).
+Lassen Sie dieses Terminalfenster die ganze Zeit geöffnet (leave this terminal window open).
 
-Vom zweiten Computer verbinden: Auf Ihrem zweiten Computer ist die Adresse Ihres Backends jetzt nicht mehr localhost, sondern die IP-Adresse Ihres Hauptcomputers. Zum Beispiel: http://192.168.1.50:8090.
+Schritt 3.2: Datenbank-Sammlung erstellen (Create Database Collection)
+Admin-UI öffnen: Gehen Sie in Ihrem Browser zur Admin-Oberfläche. Die Adresse ist normalerweise http://127.0.0.1:8090/_/.
 
-3. CRUD-Operationen mit der PocketBase-API
-Ihre Frontend-Anwendung (Vue.js) wird mit dem Backend über eine API (Application Programming Interface) sprechen. Eine API ist wie ein Kellner (a waiter), der Bestellungen (requests) vom Frontend entgegennimmt und sie an die Küche (das Backend) weitergibt.
+Admin-Konto erstellen: Erstellen Sie beim ersten Besuch ein Admin-Konto.
 
-PocketBase erstellt diese API für Sie automatisch. Hier sind die "Bestellungen", die Ihr Frontend senden wird:
+notes-Sammlung erstellen:
 
-CREATE (Eine neue Notiz erstellen)
-Aktion: Sende eine POST-Anfrage an den Server.
+Klicken Sie auf "+ New Collection".
 
-Adresse: http://<IP-ADRESSE>:8090/api/collections/notes/records
+Nennen Sie die Sammlung notes.
 
-Daten: Die Anfrage enthält die Daten für die neue Notiz (Titel, Inhalt) im JSON-Format.
+Fügen Sie die folgenden Felder (fields) hinzu:
 
-Ergebnis: Das Backend speichert die Notiz und gibt ihr eine einzigartige ID (a unique ID).
+title (Typ: text)
 
-READ (Alle Notizen lesen)
-Aktion: Sende eine GET-Anfrage an den Server.
+content (Typ: editor)
 
-Adresse: http://<IP-ADRESSE>:8090/api/collections/notes/records
+drawingData (Typ: text)
 
-Daten: Keine Daten nötig.
+Test-Benutzer erstellen (Create Test User):
 
-Ergebnis: Das Backend sendet eine Liste mit allen Notizen, die es gespeichert hat.
+Gehen Sie zur users-Sammlung.
 
-UPDATE (Eine Notiz bearbeiten)
-Aktion: Sende eine PATCH-Anfrage an den Server. PATCH wird für eine teilweise Aktualisierung (a partial update) verwendet.
+Klicken Sie auf "+ New record".
 
-Adresse: http://<IP-ADRESSE>:8090/api/collections/notes/records/<ID_DER_NOTIZ>
+Erstellen Sie einen Benutzer mit der E-Mail test@example.com und einem Passwort Ihrer Wahl (mindestens 8 Zeichen).
 
-(Ersetzen Sie <ID_DER_NOTIZ> mit der echten ID der Notiz, die Sie ändern wollen).
+4. Entwicklungs-Einrichtung (Development Setup)
+Dies richtet Ihren TypeScript-Code ein, damit er mit dem PocketBase-Backend sprechen kann.
 
-Daten: Die Anfrage enthält nur die Daten, die geändert wurden (z.B. nur der neue Titel).
+Terminal öffnen: Öffnen Sie ein zweites Terminalfenster (a second terminal window).
 
-Ergebnis: Das Backend aktualisiert die Notiz in der Datenbank.
+Navigieren: Wechseln Sie in den backend-Ordner.
 
-DELETE (Eine Notiz löschen)
-Aktion: Sende eine DELETE-Anfrage an den Server.
+cd path/to/your/project/notes-app/backend
 
-Adresse: http://<IP-ADRESSE>:8090/api/collections/notes/records/<ID_DER_NOTIZ>
+Abhängigkeiten installieren (Install Dependencies): Führen Sie diesen Befehl aus, um alle notwendigen Pakete (all necessary packages) aus der package.json zu installieren.
 
-Daten: Keine Daten nötig.
+npm install
 
-Ergebnis: Das Backend findet die Notiz mit dieser ID und löscht sie aus der Datenbank.
+Entwicklungsserver starten (Start Development Server): Führen Sie diesen Befehl aus, um Ihren index.ts-Code zu starten.
 
-Mit diesem Plan ist Ihr Backend vollständig definiert und bereit für die Entwicklung des Frontends.
+npm run dev
+
+Dieses Terminal zeigt Ihnen die console.log-Ausgaben (outputs) Ihres Codes an.
+
+5. Wichtige Dokumentation
+PocketBase JavaScript SDK: https://pocketbase.io/docs/api-records/ - Hier finden Sie alle Befehle, um mit Ihren Daten zu arbeiten (CREATE, READ, UPDATE, DELETE).
+
+TypeScript Dokumentation: https://www.typescriptlang.org/docs/
+
+Ihr Projekt ist jetzt vollständig eingerichtet. Sie haben einen laufenden PocketBase-Server und einen laufenden Node.js-Prozess, der bereit ist, Anweisungen (instructions) auszuführen.

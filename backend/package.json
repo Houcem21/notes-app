@@ -2,8 +2,8 @@
   "name": "notes-backend",
   "version": "1.0.0",
   "type": "module",
-
   "dependencies": {
+    "express": "^5.1.0",
     "from": "^0.1.7",
     "pocketbase": "^0.26.2",
     "PocketBase": "npm:pocketbase@^0.26.2"
