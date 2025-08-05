@@ -9,6 +9,7 @@
     "PocketBase": "npm:pocketbase@^0.26.2"
   },
   "devDependencies": {
+    "@types/express": "^5.0.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   },
