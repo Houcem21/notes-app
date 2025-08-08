@@ -1,9 +1,12 @@
 import PocketBase from 'pocketbase';
 import express, {Application, Request, Response} from 'express';
+import cors from 'cors';
 
 const app : Application = express();
 const port : number = 3000;
 const pb = new PocketBase('http://127.0.0.1:8090');
+
+app.use(cors())
 
 const userData = await pb.collection('users').authWithPassword('test@example.com', '12345678');
 console.log(userData);
@@ -65,10 +68,10 @@ app.post('/c', async (req: Request,res: Response) => {
     }
 })
 
-app.put('/u', async (req: Request,res: Response) => {
+app.put('/u/:id', async (req: Request,res: Response) => {
     try {
-        const {id, title, content} = req.body;
-        const record = await pb.collection('notes').update(id ,{title: title ,content: content});
+        const {title, content} = req.body;
+        const record = await pb.collection('notes').update(req.params.id ,{title: title ,content: content});
 
         res.status(201).send(record)
     } catch (error) {
@@ -76,11 +79,10 @@ app.put('/u', async (req: Request,res: Response) => {
     }
 })
 
-app.delete('/d', async (req: Request,res: Response) => {
+app.delete('/d/:id', async (req: Request,res: Response) => {
     try {
-        const {id} = req.body;
-        await pb.collection('notes').delete(id);
-        res.status(201).send("Successfully deleted " + id)
+        await pb.collection('notes').delete(req.params.id);
+        res.status(201).send(req.params)
     } catch (error) {
         res.status(500).json({ error: 'Failed to delete note' });
     }

@@ -34,6 +34,8 @@ Entpacken (Unzip): Erstellen Sie einen pocketbase-Ordner innerhalb Ihres backend
 Server starten: Öffnen Sie ein neues Terminalfenster (a new terminal window), navigieren Sie in den backend/pocketbase-Ordner und starten Sie den Server mit diesem Befehl (this command):
 
 # Dieser Befehl macht den Server in Ihrem lokalen Netzwerk erreichbar (accessible)
+cd backend/pocketbase_0.29.0_darwin_arm64 
+
 ./pocketbase serve --http="0.0.0.0:8090"
 
 Lassen Sie dieses Terminalfenster die ganze Zeit geöffnet (leave this terminal window open).
@@ -72,7 +74,7 @@ Terminal öffnen: Öffnen Sie ein zweites Terminalfenster (a second terminal win
 
 Navigieren: Wechseln Sie in den backend-Ordner.
 
-cd path/to/your/project/notes-app/backend
+cd backend
 
 Abhängigkeiten installieren (Install Dependencies): Führen Sie diesen Befehl aus, um alle notwendigen Pakete (all necessary packages) aus der package.json zu installieren.
 
@@ -84,9 +86,22 @@ npm run dev
 
 Dieses Terminal zeigt Ihnen die console.log-Ausgaben (outputs) Ihres Codes an.
 
+Und dann:
+
+cd ../frontend
+
+npm install
+
+npm run format
+
+npm run dev
+
 5. Wichtige Dokumentation
 PocketBase JavaScript SDK: https://pocketbase.io/docs/api-records/ - Hier finden Sie alle Befehle, um mit Ihren Daten zu arbeiten (CREATE, READ, UPDATE, DELETE).
 
 TypeScript Dokumentation: https://www.typescriptlang.org/docs/
 
 Ihr Projekt ist jetzt vollständig eingerichtet. Sie haben einen laufenden PocketBase-Server und einen laufenden Node.js-Prozess, der bereit ist, Anweisungen (instructions) auszuführen.
+
+
+// Nachste Schritte ist zu Form erstellem im frontend
