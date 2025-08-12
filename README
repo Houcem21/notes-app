@@ -88,7 +88,7 @@ Dieses Terminal zeigt Ihnen die console.log-Ausgaben (outputs) Ihres Codes an.
 
 Und dann:
 
-cd ../frontend
+cd frontend
 
 npm install
 

@@ -57,6 +57,18 @@ app.get('/r', async (req: Request,res: Response) => {
     }
 })
 
+app.get('/r/:id', async (req: Request,res: Response) => {
+    try {
+        const record = await pb.collection('notes').getOne(req.params.id, {
+            expand: 'title,content,drawingData',
+        });
+        console.log(record)
+        res.status(200).send(record)
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to read' });
+    }
+})
+
 app.post('/c', async (req: Request,res: Response) => {
     try {
         const {title, content} = req.body;
