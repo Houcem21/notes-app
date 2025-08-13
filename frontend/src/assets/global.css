@@ -33,3 +33,11 @@ button {
 a {
     text-decoration: none;
 }
+
+.gap-1-rem {
+    gap: 1rem;
+}
+
+.flex {
+    display: flex;
+}

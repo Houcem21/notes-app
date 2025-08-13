@@ -25,9 +25,10 @@ async function fetchNotes() {
     <h1>Die Schaltfläche auf Klicken Sie, um die Notizen zu sehen.</h1>
     <button class="fetch-btn" @click="fetchNotes">Genau hier, Kumpel</button>
     <ul class="notes-container">
-      <li v-for="note in notes">
+      <li v-for="note in notes" class="flex gap-1-rem">
         {{ note.title }}
         <router-link :to="{path: '/update-note/' + note.id}">Aktualisieren</router-link>
+        <router-link :to="{path: '/delete-note/' + note.id}">Entfernen</router-link>
       </li>
     </ul>
     <router-link to="/create-note">Erstellen Neue</router-link>

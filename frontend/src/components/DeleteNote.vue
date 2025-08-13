@@ -31,14 +31,13 @@ onMounted(() => {
 const successMessage = ref('');
 const failureMessage = ref('');
 
-async function updatePost() {
+async function deletePost() {
   try {
-  const response = await fetch(`http://localhost:3000/u/${userId}`, {
-    method: 'PUT',
+  const response = await fetch(`http://localhost:3000/d/${userId}`, {
+    method: 'DELETE',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(note.value)
   });
 
   if (!response.ok) {
@@ -46,31 +45,25 @@ async function updatePost() {
     throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
   }
   const data = await response.json();
-  successMessage.value = `Post updated successfully: ${JSON.stringify(data)}`;
+  successMessage.value = `Post deleted successfully: ${JSON.stringify(data)}`;
 
   } catch (error) {
-    if (error instanceof Error) failureMessage.value = `Error updating post: ${error?.message}`;
+    if (error instanceof Error) failureMessage.value = `Error deleting post: ${error?.message}`;
     else console.log("Unknown error occured")
   }
 }
 </script>
 
 <template>
-  <div class="wrapper flex-centered">
-    <h1>Anderung ein Beitrag</h1>
-    <form @submit.prevent="updatePost">
-      <div>
-        <label for="title">Titel</label>
-        <input type="text" v-model="note.title" id="title" required>
-      </div>
-      <div>
-        <label for="content">Inhalt</label>
-        <textarea type="text" v-model="note.content" id="content" required>
-        </textarea>
-      </div>
-      <button>Beitrag hochladen</button>
-    </form>
+  <div class="wrapper flex-centered gap-1-rem">
+    <h1>Sicher?</h1>
 
+    <div class="post-container">
+        <h3>{{ note.title }}</h3>
+        <p>{{ note.content }}</p>
+    </div>
+    
+    <button @click="deletePost">Bestätigen</button>
     <p v-if="successMessage" class="success">{{  successMessage }}</p>
     <p v-if="failureMessage" class="failure">{{  failureMessage }}</p>
 

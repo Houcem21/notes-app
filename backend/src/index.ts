@@ -4,7 +4,7 @@ import cors from 'cors';
 
 const app : Application = express();
 const port : number = 3000;
-const pb = new PocketBase('http://127.0.0.1:8090');
+const pb = new PocketBase('http://0.0.0.0:8090');
 
 app.use(cors())
 
