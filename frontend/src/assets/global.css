@@ -1,43 +1,42 @@
 .flex-centered {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .wrapper {
-    padding: 10rem;
-    box-shadow: 0 4px 2px -2px rgba(0,0,0,0.4);
+  padding: 10rem;
+  box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.4);
 
-    button {
-        background-color: green;
-
-    }
+  button {
+    background-color: green;
+  }
 }
 
 button {
-    padding: 1rem;
-    font-size: 1rem;
-    border: none;
-    border-radius: 20px
+  padding: 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 20px;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .gap-1-rem {
-    gap: 1rem;
+  gap: 1rem;
 }
 
 .flex {
-    display: flex;
+  display: flex;
 }

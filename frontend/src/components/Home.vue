@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import {ref} from 'vue';
+import { ref } from 'vue'
 
 interface Note {
-  id: string,
-  title: string,
+  id: string
+  title: string
   content: string
 }
 
@@ -11,9 +11,9 @@ const notes = ref<Note[]>([])
 
 async function fetchNotes() {
   try {
-    const response = await fetch("http://localhost:3000/r");
-    const data = await response.json();
-    notes.value = Array.from(data);
+    const response = await fetch('http://localhost:3000/r')
+    const data = await response.json()
+    notes.value = Array.from(data)
   } catch (error) {
     console.log(error)
   }
@@ -27,14 +27,12 @@ async function fetchNotes() {
     <ul class="notes-container">
       <li v-for="note in notes" class="flex gap-1-rem">
         {{ note.title }}
-        <router-link :to="{path: '/update-note/' + note.id}">Aktualisieren</router-link>
-        <router-link :to="{path: '/delete-note/' + note.id}">Entfernen</router-link>
+        <router-link :to="{ path: '/update-note/' + note.id }">Aktualisieren</router-link>
+        <router-link :to="{ path: '/delete-note/' + note.id }">Entfernen</router-link>
       </li>
     </ul>
     <router-link to="/create-note">Erstellen Neue</router-link>
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

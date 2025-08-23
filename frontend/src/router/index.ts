@@ -7,10 +7,10 @@ import DeleteNote from '@/components/DeleteNote.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {path: '/', component: Home},
-    {path: '/create-note', component: CreateNote},
-    {path: '/update-note/:id', component: UpdateNote},
-    {path: '/delete-note/:id', component: DeleteNote}
+    { path: '/', component: Home },
+    { path: '/create-note', component: CreateNote },
+    { path: '/update-note/:id', component: UpdateNote },
+    { path: '/delete-note/:id', component: DeleteNote },
   ],
 })
 
